@@ -1,0 +1,82 @@
+{% extends "./base.html" %}
+
+{% block title %} Productos {% endblock %}
+
+{% block body %}
+<ul class="nav nav-tabs" style="background-color: #f6f9fc;">
+    
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="volverini/">Principal</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="irProveedores/">Proveedores</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="irProductos/">Productos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link ">Asesoria</a>
+  </li>
+</ul>
+
+<div class="container py-4">
+
+    <div class="row" >
+       
+        <div class= "col-sm-12 col-md-6 col-lg-4 col-xl-4">
+
+              
+            <ol class="list-group list-group-numbered" >
+                {% for c in productos %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start" >
+                    <div class="ms-2 me-auto" >
+                        <div class="fw-bold">{{c.nombre}}</div>
+                        {{c.descripcion}}
+                    </div>
+                    <a href="creartransaccion/{{c.codigoPrd}}"  class="btn btn-primary " >{{c.codigoPrd}}</a>
+                    </li>
+                {% endfor %}
+            
+            </ol>
+             
+        </div>
+
+        <div class= "col-sm-12 col-md-6 col-lg-8 col-xl-8">
+
+            
+            <div class="table-wrapper">
+                <table class="fl-table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Producto</th>
+                        <th>Transaccion</th>
+                        <th>cantidad</th>
+                        <th>Restante</th>
+                        <th>Fecha</th>
+                    </thead>
+                    <tbody>
+                        {% for c in productos %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{c.nombre}}</td>
+                                <td>{{c.tipodeTransaccion}}</td>
+                                <td>{{c.cantidadB}}</td>
+                                <td>{{c.cantidadA}}</td>
+                                <td>{{c.fecha}}</td>
+                                
+                            </tr>
+
+                        {% endfor %}
+                    <tbody>
+                </table>
+            </div>
+           
+              
+            
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+    

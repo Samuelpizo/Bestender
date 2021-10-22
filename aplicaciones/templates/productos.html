@@ -1,0 +1,111 @@
+{% extends "./base.html" %}
+
+{% block title %} Productos {% endblock %}
+
+{% block body %}
+<ul class="nav nav-tabs" style="background-color: #f6f9fc;">
+    
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="volver/">Principal</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="iraProveedores/">Proveedores</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="iraTransacciones/">Transacciones</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link ">Asesoria</a>
+  </li>
+</ul>
+
+<div class="container py-4">
+
+    <div class="row" >
+        <nav class="navbar navbar-light" style="background-color: #e8ddc5;">
+            <div class="container-fluid">
+            <a class="navbar-brand">Proveedor</a>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit" >Search</button>
+            </form>
+            </div>
+        </nav>
+        <div class= "col-sm-12 col-md-6 col-lg-4 col-xl-4">
+            {%  if messages %}
+            {%  for message in messages %}
+            <div class = "alert alert-dismissivle alert-success">
+                <button type="button" class="close" class="btn btn-info" data-dismiss="alert">&times;</button>
+                <strong class="text-dark">{{message}}</strong>
+
+            </div>
+            
+            {%  endfor %}
+            {%  endif %}
+            <h2>Registrar Producto</h2>
+            <div class="card">
+                <div class="card-body">
+                    <form action="/registrarProducto/" method="POST"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtcodigoPrd" name="txtcodigoPrd" class ="form-control" placeholder="codigo de producto" 
+                        minlength="4" maxlength="4" required>
+                        </div>
+                        <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" class ="form-control" placeholder="Producto" 
+                        maxlength="30" required>
+                        </div>
+                        <div class="form-group">
+                        <input type="text" id="txtcategoria" name="txtcategoria" class ="form-control" placeholder="categoria" 
+                        maxlength="50" required>
+                        </div>
+                        <div class="form-group">
+                        <input type="text" id="txtdescripcion" name="txtdescripcion" class ="form-control" placeholder="Descripcion" 
+                        maxlength="150" required>
+                        </div>
+                        <div class="form-group">
+                        <input type="text" id="txtcantidad" name="txtcantidad" class ="form-control" placeholder="Cantidad" 
+                        maxlength="15">
+                        </div>
+                        <div class="form-group" >
+                        <button type="submit"  class="btn btn-success btn-block text-white">Guardar</button>
+                        </div>
+                </form>
+            </div>
+        </div>   
+    </div>
+        <div class= "col-sm-12 col-md-6 col-lg-8 col-xl-8">
+            <h1>Listado de productos</h1>
+        <div class="table resposive py-2">
+            <table class= "table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Codigo</th>
+                        <th>Producto</th>
+                        <th>Categoria</th>
+                        <th>Descripcion</th>
+                        
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in productos %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{c.codigoPrd}}</td>
+                        <td>{{c.nombre}}</td>
+                        <td>{{c.categoria}}</td>
+                        <td>{{c.descripcion}}</td>
+                        
+                        <td><a href="edicionProducto/{{c.codigoPrd}}" class="btn btn-info" >Editar</a></td>
+                        <td><a href="eliminarProducto/{{c.codigoPrd}}" class="btn btn-danger btnEliminacion" >Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+    

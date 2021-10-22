@@ -1,0 +1,115 @@
+$normal-color: #a8b1b8;
+$active-color: #5cadd8;
+$field-focus-background: lighten($active-color, 30%);
+$base-spacing: 20px;
+$green: #7fa743;
+$blue: #617db7;
+
+
+@mixin centered() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: lightgrey;
+  font-family: sans-serif;
+}
+
+.Login-Wrap {
+  @include centered;
+  width: 450px;
+  height: 490px;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+}
+
+.Field {
+  position: relative;
+  padding: $base-spacing;
+  float: left;
+  height: 80px;
+}
+
+.Field--half {
+  width: 50%;
+}
+
+.Field--full {
+  width: 100%;
+}
+
+.Field-label {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: $base-spacing;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+  overflow: hidden;
+  border: 1px solid transparent; 
+}
+
+.Field-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  border: none;
+  padding: $base-spacing;
+  height: 40px;
+  font-size: 13px;
+  width: 100%;
+  color: $normal-color;
+  border: 1px solid transparent;
+  
+  &:focus {
+    background: $field-focus-background;  
+    outline: none;
+    border: 1px solid $active-color;
+    border-top: 0;
+  }
+  
+  &:focus ~ .Field-label {
+   background: $field-focus-background;
+   color: $active-color;
+   border: 1px solid $active-color;
+  }
+}
+
+.Field-button {
+  width: 100%;
+  padding: 15px 30px;
+  border: none;
+}
+
+.Field-button--submit {
+  background: $green;
+  box-shadow: inset 0 -5px 0 darken($green, 10%);
+  color: white;
+}
+
+.Field-button--facebook {
+  background: $blue;
+  box-shadow: inset 0 -5px 0 darken($blue, 10%);
+  color: white;
+}
+
+.Login-row {
+  width: 100%;
+  padding: $base-spacing;
+  float: left;
+  border-top: 1px solid lighten($normal-color, 20%);
+}
